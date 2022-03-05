@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Center(
       child: Text(
-        appTitle,
+        AppStrings.appTitle,
         style: _textTheme.headline5,
       ),
     );
