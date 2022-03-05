@@ -1,0 +1,16 @@
+{
+  "name": "firestore-uploader",
+  "version": "1.0.0",
+  "description": 
+    "This script was created only to upload the project resources to Firestore database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "author": "José Lucas da Silva",
+  "license": "ISC",
+  "dependencies": {
+    "firebase": "^9.6.8"
+  }
+}
