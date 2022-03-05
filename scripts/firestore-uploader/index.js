@@ -1,6 +1,11 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  Timestamp,
+} from "firebase/firestore";
 import { readFileSync } from "fs";
 
 const productsPath = "../../products.json";
@@ -29,7 +34,10 @@ const products = loadProductsFile(productsPath);
 
 for (const product of products) {
   try {
-    const docRef = await addDoc(collection(db, "Products"), product);
+    const docRef = await addDoc(collection(db, "Products"), {
+      ...product,
+      dateCreated: Timestamp.now(),
+    });
     console.log("Document written with ID: ", docRef.id);
   } catch (e) {
     console.error("Error adding document: ", e);

@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class ProductModel {
   final String id;
+  final Timestamp dateCreated;
   final String title;
   final String type;
   final String description;
@@ -11,6 +14,7 @@ class ProductModel {
 
   ProductModel({
     required this.id,
+    required this.dateCreated,
     required this.title,
     required this.type,
     required this.description,
@@ -24,6 +28,7 @@ class ProductModel {
   factory ProductModel.fromMap(String id, Map<String, dynamic>? map) =>
       ProductModel(
         id: id,
+        dateCreated: map?['dateCreated'] ?? Timestamp.now(),
         title: map?['title'] ?? '',
         type: map?['type'] ?? '',
         description: map?['description'] ?? '',
@@ -36,6 +41,7 @@ class ProductModel {
 
   Map<String, dynamic> toMap() => {
         'title': title,
+        'dateCreated': dateCreated,
         'type': type,
         'description': description,
         'filename': filename,
