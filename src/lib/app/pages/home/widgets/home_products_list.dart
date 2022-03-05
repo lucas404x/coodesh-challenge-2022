@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
 
-const _products = [
-  {
-    'name': 'example_1',
-    'price': 10.3,
-  },
-  {
-    'name': 'example_1',
-    'price': 10.3,
-  },
-  {
-    'name': 'example_1',
-    'price': 10.3,
-  },
-  {
-    'name': 'example_1',
-    'price': 10.3,
-  }
-];
+import '../../../core/models/product_list_model.dart';
 
 class HomeProductsList extends StatelessWidget {
-  const HomeProductsList({Key? key}) : super(key: key);
+  final List<ProductListModel> products;
+
+  const HomeProductsList({
+    Key? key,
+    required this.products,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: _products.length,
+      physics: const BouncingScrollPhysics(),
+      itemCount: products.length,
       itemBuilder: (context, index) => ListTile(
-        title: Text(_products[index]['name'].toString()),
-        subtitle: Text(_products[index]['price'].toString()),
+        title: Text(products[index].title),
+        subtitle: Text(products[index].price),
       ),
     );
   }

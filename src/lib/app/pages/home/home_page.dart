@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
                     } else if (state is HomeProductsLoadingState) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (state is HomeProductsLoadedState) {
-                      return const HomeProductsList();
+                      return HomeProductsList(products: state.products);
                     } else {
                       return Center(
                         child: Text((state as HomeProductsErrorState).message),
