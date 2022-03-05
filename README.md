@@ -19,7 +19,7 @@
 
 ## Aplicação Flutter
  
-![<img src="assets/images/home.png" height="500" alt="Home" title="Home"/>](assets/images/home.png)
+![<img src="home.png" height="500" alt="Home" title="Home"/>](home.png)
 
 #### Listar produtos
  
