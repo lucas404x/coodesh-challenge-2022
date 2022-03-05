@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../interfaces/product_repository_interface.dart';
 import '../models/product_model.dart';
 
-class ProductRepository implements IProductRepositry {
+class ProductRepository implements IProductRepository {
   static const String _collectionPath = 'Products';
 
   late final CollectionReference<ProductModel> _collectionReference;
@@ -14,14 +14,12 @@ class ProductRepository implements IProductRepositry {
   }
 
   _setup() {
-    _collectionReference =
-        _db.collection(_collectionPath).withConverter<ProductModel>(
-              fromFirestore: (snapshot, _) => ProductModel.fromMap(
-                snapshot.id,
-                snapshot.data(),
-              ),
-              toFirestore: (snapshot, _) => snapshot.toMap(),
-            );
+    _collectionReference = _db
+        .collection(_collectionPath)
+        .withConverter<ProductModel>(
+            fromFirestore: (snapshot, _) =>
+                ProductModel.fromMap(snapshot.id, snapshot.data()),
+            toFirestore: (snapshot, _) => snapshot.toMap());
   }
 
   @override
