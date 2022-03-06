@@ -11,6 +11,7 @@ class ProductListModel {
   final String date;
   final String type;
   final String price;
+  final int rating;
 
   ProductListModel({
     required this.id,
@@ -21,6 +22,7 @@ class ProductListModel {
     required this.date,
     required this.type,
     required this.price,
+    required this.rating,
   });
 
   factory ProductListModel.fromProductModel(ProductModel product) =>
@@ -33,5 +35,6 @@ class ProductListModel {
         height: product.height,
         type: product.type,
         price: fromNumberToPriceFormatted(product.price),
+        rating: product.rating,
       );
 }

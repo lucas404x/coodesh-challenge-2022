@@ -1,0 +1,1 @@
+enum ProductListEnum { edit, delete }

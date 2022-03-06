@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'constants/app_colors.dart';
 import 'core/interfaces/product_repository_interface.dart';
 import 'core/repositories/product_repository.dart';
 import 'pages/home/bloc/home_bloc.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
       ),
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        backgroundColor: AppColors.backgroundColor,
+        scaffoldBackgroundColor: AppColors.backgroundColor,
         textTheme: GoogleFonts.openSansTextTheme(),
       ),
     );

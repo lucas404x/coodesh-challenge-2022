@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/models/product_list_model.dart';
+import '../../../widgets/product_list_tile.dart';
 
 class HomeProductsList extends StatelessWidget {
   final List<ProductListModel> products;
@@ -15,9 +16,11 @@ class HomeProductsList extends StatelessWidget {
     return ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: products.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(products[index].title),
-        subtitle: Text(products[index].price),
+      itemBuilder: (context, index) => Padding(
+        padding: const EdgeInsets.only(bottom: 24.0),
+        child: ProductListTile(
+          product: products[index],
+        ),
       ),
     );
   }
