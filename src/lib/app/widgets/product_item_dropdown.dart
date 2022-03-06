@@ -20,19 +20,29 @@ class ProductItemDropwdown extends StatelessWidget {
         child: DropdownButton<ProductListEnum>(
           isDense: true,
           icon: const Icon(Icons.more_horiz),
-          items: [
+
+          items: const [
             DropdownMenuItem(
-              child: const Text('Edit'),
+              child: Text('Edit'),
               value: ProductListEnum.edit,
-              onTap: onEdit,
             ),
             DropdownMenuItem(
-              child: const Text('Delete'),
+              child: Text('Delete'),
               value: ProductListEnum.delete,
-              onTap: onDelete,
             ),
           ],
-          onChanged: (value) {},
+          onChanged: (ProductListEnum? value) {
+            if (value == null) return;
+            
+            switch (value) {
+              case ProductListEnum.edit:
+                onEdit();
+                break;
+              case ProductListEnum.delete:
+                onDelete();
+                break;
+            }
+          },
         ),
       ),
     );

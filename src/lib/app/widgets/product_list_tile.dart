@@ -3,6 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../constants/app_assets.dart';
 import '../core/models/product_list_model.dart';
+import '../pages/product/product_page.dart';
 import 'product_item_dropdown.dart';
 
 class ProductListTile extends StatefulWidget {
@@ -47,11 +48,14 @@ class _ProductListTileState extends State<ProductListTile> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Image.asset(
-                '${AppAssets.imagesPath}/${widget.product.image}',
-                fit: BoxFit.cover,
-                width: 85,
-                height: 85,
+              Hero(
+                tag: widget.product.id,
+                child: Image.asset(
+                  '${AppAssets.imagesPath}/${widget.product.image}',
+                  fit: BoxFit.cover,
+                  width: 85,
+                  height: 85,
+                ),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -74,7 +78,7 @@ class _ProductListTileState extends State<ProductListTile> {
                             alignment: Alignment.centerRight,
                             child: Text(widget.product.date),
                           )
-                        : const SizedBox()
+                        : const SizedBox(),
                   ],
                 ),
               )
@@ -113,8 +117,15 @@ class _ProductListTitle extends StatelessWidget {
           ),
         ),
         ProductItemDropwdown(
+          onEdit: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return ProductPage(
+                productId: product.id,
+                image: '${AppAssets.imagesPath}/${product.image}',
+              );
+            }));
+          },
           onDelete: () {},
-          onEdit: () {},
         ),
       ],
     );

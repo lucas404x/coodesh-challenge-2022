@@ -29,6 +29,12 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
+  Future<ProductModel> getProduct(String id) async {
+    final snapshot = await _collectionReference.doc(id).get();
+    return snapshot.data()!;
+  }
+
+  @override
   Future<bool> saveProduct(ProductModel product) {
     throw UnimplementedError();
   }
