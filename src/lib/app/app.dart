@@ -4,12 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'constants/app_colors.dart';
 import 'core/interfaces/product_repository_interface.dart';
-import 'core/repositories/product_repository.dart';
-import 'pages/home/bloc/home_bloc.dart';
 import 'pages/home/home_page.dart';
+import 'pages/product/product_page.dart';
 
 class MyApp extends StatelessWidget {
-  final ProductRepository productRepository;
+  final IProductRepository productRepository;
 
   const MyApp({
     Key? key,
@@ -21,14 +20,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Coodesh Challenge',
-      home: MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider<IProductRepository>.value(
-            value: productRepository,
-          ),
-        ],
-        child: const HomePage(),
-      ),
+      routes: {
+        HomePage.router: (context) => RepositoryProvider.value(
+              value: productRepository,
+              child: const HomePage(),
+            ),
+        ProductPage.router: (context) => RepositoryProvider.value(
+              value: productRepository,
+              child: const ProductPage(),
+            )
+      },
+      initialRoute: HomePage.router,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         backgroundColor: AppColors.backgroundColor,

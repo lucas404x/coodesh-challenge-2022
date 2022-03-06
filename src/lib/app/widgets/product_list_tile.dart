@@ -118,12 +118,10 @@ class _ProductListTitle extends StatelessWidget {
         ),
         ProductItemDropwdown(
           onEdit: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return ProductPage(
-                productId: product.id,
-                image: '${AppAssets.imagesPath}/${product.image}',
-              );
-            }));
+            Navigator.of(context).pushNamed(
+              ProductPage.router,
+              arguments: product,
+            );
           },
           onDelete: () {},
         ),

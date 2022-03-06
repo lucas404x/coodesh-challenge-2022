@@ -11,6 +11,8 @@ import 'widgets/home_products_list.dart';
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
+  static const String router = '/';
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
