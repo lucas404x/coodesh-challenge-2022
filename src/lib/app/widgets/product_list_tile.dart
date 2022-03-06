@@ -24,24 +24,24 @@ class _ProductListTileState extends State<ProductListTile> {
   Widget build(BuildContext context) {
     final _textTheme = Theme.of(context).textTheme;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            offset: const Offset(0, 3.0),
-            blurRadius: 12.0,
-            spreadRadius: 1.0,
-          ),
-        ],
-      ),
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            showDate = !showDate;
-          });
-        },
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          showDate = !showDate;
+        });
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              offset: const Offset(0, 3.0),
+              blurRadius: 12.0,
+              spreadRadius: 1.0,
+            ),
+          ],
+        ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Row(
