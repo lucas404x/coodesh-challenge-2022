@@ -28,6 +28,9 @@ dependencies:
   firebase_core: 1.13.1
   cloud_firestore: 3.1.10
 
+  # Rating Bar
+  flutter_rating_bar: 4.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
