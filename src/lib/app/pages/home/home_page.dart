@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../core/interfaces/product_repository_interface.dart';
 import 'bloc/home_bloc.dart';
 import 'bloc/home_bloc_event.dart';
 import 'bloc/home_bloc_state.dart';
@@ -9,6 +10,18 @@ import 'widgets/home_products_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      child: const _HomePage(),
+      create: (context) => HomeBloc(context.read<IProductRepository>()),
+    );
+  }
+}
+
+class _HomePage extends StatelessWidget {
+  const _HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

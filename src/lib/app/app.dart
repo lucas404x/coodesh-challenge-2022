@@ -27,10 +27,7 @@ class MyApp extends StatelessWidget {
             value: productRepository,
           ),
         ],
-        child: BlocProvider(
-          create: (context) => HomeBloc(productRepository),
-          child: const HomePage(),
-        ),
+        child: const HomePage(),
       ),
       theme: ThemeData(
         primarySwatch: Colors.blue,
