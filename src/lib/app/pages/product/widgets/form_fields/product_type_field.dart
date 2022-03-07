@@ -19,12 +19,14 @@ class ProductTypeField extends StatelessWidget {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       buildWhen: (previous, current) => previous.type != current.type,
       bloc: context.read<ProductFormBloc>(),
-      builder: (context, state) => CustomTextInput(
-        initialValue: initialValue,
-        hintText: 'Type',
-        onTextChanged: (String type) {
-          context.read<ProductFormBloc>().add(TypeProductChangeEvent(type));
-        },
+      builder: (context, state) => Flexible(
+        child: CustomTextInput(
+          initialValue: initialValue,
+          labelText: 'Type',
+          onTextChanged: (String type) {
+            context.read<ProductFormBloc>().add(TypeProductChangeEvent(type));
+          },
+        ),
       ),
     );
   }

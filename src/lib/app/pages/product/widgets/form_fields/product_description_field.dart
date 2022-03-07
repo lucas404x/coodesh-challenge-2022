@@ -17,16 +17,21 @@ class ProductDescriptionField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
-      buildWhen: (previous, current) => previous.description != current.description,
+      buildWhen: (previous, current) =>
+          previous.description != current.description,
       bloc: context.read<ProductFormBloc>(),
-      builder: (context, state) => CustomTextInput(
-        initialValue: initialValue,
-        textInputType: TextInputType.multiline,
-        isMultiline: true,
-        hintText: 'Description',
-        onTextChanged: (String description) {
-          context.read<ProductFormBloc>().add(DescriptionProductChangeEvent(description));
-        },
+      builder: (context, state) => Flexible(
+        child: CustomTextInput(
+          initialValue: initialValue,
+          textInputType: TextInputType.multiline,
+          isMultiline: true,
+          labelText: 'Description',
+          onTextChanged: (String description) {
+            context
+                .read<ProductFormBloc>()
+                .add(DescriptionProductChangeEvent(description));
+          },
+        ),
       ),
     );
   }

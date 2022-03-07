@@ -19,15 +19,17 @@ class ProductRatingField extends StatelessWidget {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       buildWhen: (previous, current) => previous.rating != current.rating,
       bloc: context.read<ProductFormBloc>(),
-      builder: (context, state) => CustomRatingBar(
-        itemSize: 35.0,
-        initialRating: initialValue.toDouble(),
-        ignoreGestures: false,
-        onRatingChange: (rating) {
-          context
-              .read<ProductFormBloc>()
-              .add(RatingProductChangeEvent(rating.toInt()));
-        },
+      builder: (context, state) => Flexible(
+        child: CustomRatingBar(
+          itemSize: 35.0,
+          initialRating: initialValue.toDouble(),
+          ignoreGestures: false,
+          onRatingChange: (rating) {
+            context
+                .read<ProductFormBloc>()
+                .add(RatingProductChangeEvent(rating.toInt()));
+          },
+        ),
       ),
     );
   }

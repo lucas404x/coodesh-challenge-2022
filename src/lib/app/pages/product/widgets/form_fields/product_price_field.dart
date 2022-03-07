@@ -19,13 +19,15 @@ class ProductPriceField extends StatelessWidget {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       buildWhen: (previous, current) => previous.price != current.price,
       bloc: context.read<ProductFormBloc>(),
-      builder: (context, state) => CustomTextInput(
-        initialValue: initialValue,
-        hintText: 'Price',
-        prefixText: 'R\$',
-        onTextChanged: (String price) {
-          context.read<ProductFormBloc>().add(PriceProductChangeEvent(price));
-        },
+      builder: (context, state) => Flexible(
+        child: CustomTextInput(
+          initialValue: initialValue,
+          labelText: 'Price',
+          prefixText: 'R\$',
+          onTextChanged: (String price) {
+            context.read<ProductFormBloc>().add(PriceProductChangeEvent(price));
+          },
+        ),
       ),
     );
   }

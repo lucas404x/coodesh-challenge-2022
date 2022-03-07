@@ -49,19 +49,18 @@ class _ProductBodyForm extends StatelessWidget {
         child: Column(
           children: [
             ProductTitleField(initialValue: product.title),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
-                  child: ProductTypeField(initialValue: product.type),
-                ),
+                ProductTypeField(initialValue: product.type),
                 const SizedBox(width: 8),
-                Flexible(
-                  child: ProductPriceField(initialValue: product.price.toString()),
-                )
+                ProductPriceField(initialValue: product.price.toString())
               ],
             ),
+            const SizedBox(height: 16),
             ProductDescriptionField(initialValue: product.description),
+            const SizedBox(height: 16),
             ProductRatingField(initialValue: product.rating),
           ],
         ),

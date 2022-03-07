@@ -19,12 +19,14 @@ class ProductTitleField extends StatelessWidget {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       buildWhen: (previous, current) => previous.title != current.title,
       bloc: context.read<ProductFormBloc>(),
-      builder: (context, state) => CustomTextInput(
-        initialValue: initialValue,
-        hintText: 'Title',
-        onTextChanged: (String title) {
-          context.read<ProductFormBloc>().add(TitleProductChangeEvent(title));
-        },
+      builder: (context, state) => Flexible(
+        child: CustomTextInput(
+          initialValue: initialValue,
+          labelText: 'Title',
+          onTextChanged: (String title) {
+            context.read<ProductFormBloc>().add(TitleProductChangeEvent(title));
+          },
+        ),
       ),
     );
   }

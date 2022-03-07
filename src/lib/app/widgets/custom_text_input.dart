@@ -4,14 +4,14 @@ class CustomTextInput extends StatefulWidget {
   final Function(String) onTextChanged;
   final String initialValue;
   final TextInputType textInputType;
-  final String hintText;
+  final String labelText;
   final String? prefixText;
   final bool isMultiline;
 
   const CustomTextInput({
     Key? key,
     required this.onTextChanged,
-    required this.hintText,
+    required this.labelText,
     required this.initialValue,
     this.prefixText,
     this.textInputType = TextInputType.text,
@@ -26,7 +26,7 @@ class CustomTextInputState extends State<CustomTextInput> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 80,
+      height: widget.isMultiline ? null : 60,
       child: TextFormField(
         keyboardType: widget.textInputType,
         scrollController: null,
@@ -38,7 +38,7 @@ class CustomTextInputState extends State<CustomTextInput> {
           contentPadding: widget.isMultiline
               ? const EdgeInsets.all(20)
               : const EdgeInsets.only(left: 20),
-          hintText: widget.hintText,
+          labelText: widget.labelText,
           prefixText: widget.prefixText,
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
