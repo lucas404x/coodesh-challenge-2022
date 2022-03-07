@@ -1,35 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../constants/app_assets.dart';
-import '../../../core/models/product_list_model.dart';
+
+import '../blocs/product_form_bloc/product_form_state.dart';
+import '../blocs/product_form_bloc/product_form_bloc.dart';
 
 class ProductHeaderSliverBar extends StatelessWidget {
-  final ProductListModel product;
+  final String productId;
+  final String image;
 
   const ProductHeaderSliverBar({
     Key? key,
-    required this.product,
+    required this.productId,
+    required this.image,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final _size = MediaQuery.of(context).size;
 
-    return SliverAppBar(
-      elevation: 0,
-      expandedHeight: _size.height * .5,
-      floating: true,
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        centerTitle: true,
-        title: Text(product.title),
-        background: Hero(
-          tag: product.id,
-          child: Image.asset(
-            '${AppAssets.imagesPath}/${product.image}',
-            fit: BoxFit.cover,
+    return BlocBuilder<ProductFormBloc, ProductFormState>(
+      buildWhen: (previous, current) => previous.title != current.title,
+      bloc: context.read<ProductFormBloc>(),
+      builder: (context, state) => SliverOverlapAbsorber(
+        sliver: SliverSafeArea(
+          top: false,
+          sliver: SliverAppBar(
+            elevation: 0,
+            expandedHeight: _size.height * .5,
+            title: Text(state.title.value ?? ''),
+            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle: true,
+              background: Hero(
+                tag: productId,
+                child: Image.asset(
+                  '${AppAssets.imagesPath}/$image',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
         ),
+        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
       ),
     );
   }

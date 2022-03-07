@@ -1,4 +1,4 @@
-import 'package:flutter_challenge_202106/app/core/models/product_model.dart';
+import '../../../../core/models/product_model.dart';
 
 abstract class ProductBlocState {}
 
@@ -14,6 +14,6 @@ class ProductLoadedState extends ProductBlocState {
 
 class ProductErrorState extends ProductBlocState {
   final String message;
-  
+
   ProductErrorState({required this.message});
 }
