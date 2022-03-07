@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../constants/app_assets.dart';
 import '../core/models/product_list_model.dart';
 import '../pages/product/product_page.dart';
+import 'custom_rating_bar.dart';
 import 'product_item_dropdown.dart';
 
 class ProductListTile extends StatefulWidget {
@@ -145,20 +145,11 @@ class _ProductListInfo extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        RatingBar.builder(
-          initialRating: product.rating.toDouble(),
-          glow: false,
+        CustomRatingBar(
           itemSize: 25.0,
-          minRating: 1,
-          direction: Axis.horizontal,
-          itemCount: 5,
+          initialRating: product.rating.toDouble(),
           ignoreGestures: true,
-          itemPadding: const EdgeInsets.only(right: 4.0),
-          itemBuilder: (context, _) => const Icon(
-            Icons.star_rounded,
-            color: Colors.deepPurple,
-          ),
-          onRatingUpdate: (_) {},
+          onRatingChange: (_) {},
         ),
         Flexible(
           child: Text(
