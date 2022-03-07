@@ -1,6 +1,8 @@
 import '../../../../core/models/product_model.dart';
 
-abstract class ProductFormEvent {}
+abstract class ProductFormEvent {
+  ProductFormEvent();
+}
 
 class LoadProductFields extends ProductFormEvent {
   final ProductModel product;

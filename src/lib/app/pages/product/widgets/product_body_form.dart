@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/models/product_model.dart';
-import '../../../widgets/custom_rating_bar.dart';
 import '../blocs/product_form_bloc/product_form_bloc.dart';
 import '../blocs/product_form_bloc/product_form_event.dart';
 import '../blocs/product_form_bloc/product_form_state.dart';
-import 'product_title_field.dart';
+import 'form_fields/product_description_field.dart';
+import 'form_fields/product_price_field.dart';
+import 'form_fields/product_rating_field.dart';
+import 'form_fields/product_title_field.dart';
+import 'form_fields/product_type_field.dart';
 
 class ProductBodyForm extends StatelessWidget {
   final ProductModel product;
@@ -46,12 +49,20 @@ class _ProductBodyForm extends StatelessWidget {
         child: Column(
           children: [
             ProductTitleField(initialValue: product.title),
-            CustomRatingBar(
-              itemSize: 35.0,
-              initialRating: product.rating.toDouble(),
-              ignoreGestures: false,
-              onRatingChange: (_) {},
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: ProductTypeField(initialValue: product.type),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: ProductPriceField(initialValue: product.price.toString()),
+                )
+              ],
+            ),
+            ProductDescriptionField(initialValue: product.description),
+            ProductRatingField(initialValue: product.rating),
           ],
         ),
       ),
