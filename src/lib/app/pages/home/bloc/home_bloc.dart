@@ -11,6 +11,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
 
   HomeBloc(this._productRepository) : super(HomeInitialState()) {
     on<GetProductsEvent>(_loadAllProducts);
+    on<DeleteProductEvent>(_deleteProduct);
   }
 
   _loadAllProducts(
@@ -27,5 +28,18 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     } catch (exception) {
       emitter(HomeProductsErrorState(exception.toString()));
     }
+  }
+
+  _deleteProduct(
+    DeleteProductEvent event,
+    Emitter<HomeBlocState> emitter,
+  ) async {
+    try {
+      await _productRepository.deleteProduct(_productsList[event.index].id);
+    } catch (exception) {
+      emitter(HomeProductsErrorState(exception.toString()));
+    }
+    _productsList.removeAt(event.index);
+    emitter(HomeProductsLoadedState(_productsList));
   }
 }

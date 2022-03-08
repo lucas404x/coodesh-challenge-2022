@@ -41,7 +41,8 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<bool> deleteProduct(String id) {
-    throw UnimplementedError();
+  Future<bool> deleteProduct(String id) async {
+    await _collectionReference.doc(id).delete();
+    return true;
   }
 }
