@@ -20,11 +20,11 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   ) {
     emitter(
       state.copyWith(
-        title: ProductFormFieldModel(value: event.product.title),
-        type: ProductFormFieldModel(value: event.product.type),
-        price: ProductFormFieldModel(value: event.product.price.toString()),
-        rating: ProductFormFieldModel(value: event.product.rating),
-        description: ProductFormFieldModel(value: event.product.description),
+        title: ProductFormFieldModel(value: event.product.title, valid: true),
+        type: ProductFormFieldModel(value: event.product.type, valid: true),
+        price: ProductFormFieldModel(value: event.product.price.toString(), valid: true),
+        rating: ProductFormFieldModel(value: event.product.rating, valid: true),
+        description: ProductFormFieldModel(value: event.product.description, valid: true),
       )
     );
   }
@@ -47,17 +47,29 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     TypeProductChangeEvent event,
     Emitter<ProductFormState> emitter,
   ) {
-    // state.type.value = event.type;
-    // state.type.valid = event.type.isNotEmpty;
-    emitter(state);
+
+    emitter(
+      state.copyWith(
+        type: ProductFormFieldModel<String>(
+          value: event.type,
+          valid: event.type.isNotEmpty,
+        ),
+      ),
+    );
   }
 
   _onPriceChanged(
     PriceProductChangeEvent event,
     Emitter<ProductFormState> emitter,
   ) {
-    // state.type.value = event.price;
-    // state.type.valid = event.price.isNotEmpty;
+    emitter(
+      state.copyWith(
+        price: ProductFormFieldModel<String>(
+          value: event.price,
+          valid: event.price.isNotEmpty,
+        ),
+      ),
+    );
   }
 
   _onDescriptionChanged(

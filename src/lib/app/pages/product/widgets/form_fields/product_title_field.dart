@@ -17,10 +17,10 @@ class ProductTitleField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductFormBloc, ProductFormState>(
-      buildWhen: (previous, current) => previous.title != current.title,
       bloc: context.read<ProductFormBloc>(),
       builder: (context, state) => Flexible(
         child: CustomTextInput(
+          errorText: state.title.valid ? null : 'An invalid title was provided.',
           initialValue: initialValue,
           labelText: 'Title',
           onTextChanged: (String title) {

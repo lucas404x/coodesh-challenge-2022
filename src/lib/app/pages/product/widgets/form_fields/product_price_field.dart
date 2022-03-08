@@ -1,3 +1,4 @@
+import 'package:currency_text_input_formatter/currency_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,8 +23,14 @@ class ProductPriceField extends StatelessWidget {
       builder: (context, state) => Flexible(
         child: CustomTextInput(
           initialValue: initialValue,
+          errorText:
+              state.price.valid ? null : 'An invalid price was provided.',
           labelText: 'Price',
           prefixText: 'R\$',
+          inputFormatters: [CurrencyTextInputFormatter(
+            locale: 'pt-BR',
+            name: ''
+          )],
           onTextChanged: (String price) {
             context.read<ProductFormBloc>().add(PriceProductChangeEvent(price));
           },

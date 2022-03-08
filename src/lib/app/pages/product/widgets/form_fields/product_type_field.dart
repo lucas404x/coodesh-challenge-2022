@@ -22,6 +22,8 @@ class ProductTypeField extends StatelessWidget {
       builder: (context, state) => Flexible(
         child: CustomTextInput(
           initialValue: initialValue,
+          errorText:
+              state.type.valid ? null : 'Type not valid.',
           labelText: 'Type',
           onTextChanged: (String type) {
             context.read<ProductFormBloc>().add(TypeProductChangeEvent(type));
