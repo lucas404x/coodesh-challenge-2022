@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       },
       initialRoute: HomePage.router,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.deepPurple,
         backgroundColor: AppColors.backgroundColor,
         scaffoldBackgroundColor: AppColors.backgroundColor,
         textTheme: GoogleFonts.openSansTextTheme(),

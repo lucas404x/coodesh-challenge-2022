@@ -1,3 +1,4 @@
+import '../../../../core/enumerators/product_form_enum.dart';
 import '../../../../core/models/product_form_field_model.dart';
 
 class ProductFormState {
@@ -6,6 +7,7 @@ class ProductFormState {
   final ProductFormFieldModel<String> price;
   final ProductFormFieldModel<String> description;
   final ProductFormFieldModel<int> rating;
+  final ProductFormEnum status;
 
   ProductFormState({
     this.title = const ProductFormFieldModel(),
@@ -13,6 +15,7 @@ class ProductFormState {
     this.price = const ProductFormFieldModel(),
     this.description = const ProductFormFieldModel(),
     this.rating = const ProductFormFieldModel(),
+    this.status = ProductFormEnum.notSubmitted,
   });
 
   ProductFormState copyWith({
@@ -21,6 +24,7 @@ class ProductFormState {
     ProductFormFieldModel<String>? price,
     ProductFormFieldModel<String>? description,
     ProductFormFieldModel<int>? rating,
+    ProductFormEnum? status,
   }) {
     return ProductFormState(
       title: title ?? this.title,
@@ -28,6 +32,7 @@ class ProductFormState {
       price: price ?? this.price,
       description: description ?? this.description,
       rating: rating ?? this.rating,
+      status: status ?? this.status,
     );
   }
 }

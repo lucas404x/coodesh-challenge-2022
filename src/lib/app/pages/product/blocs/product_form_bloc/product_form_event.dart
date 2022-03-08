@@ -39,3 +39,5 @@ class RatingProductChangeEvent extends ProductFormEvent {
 
   RatingProductChangeEvent(this.rating);
 }
+
+class UpdateProductEvent extends ProductFormEvent {}

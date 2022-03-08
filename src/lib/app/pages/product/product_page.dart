@@ -31,7 +31,9 @@ class ProductPage extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => ProductFormBloc(),
+          create: (context) => ProductFormBloc(
+            context.read<IProductRepository>(),
+          ),
         )
       ],
       child: _ProductPage(product: _product),
