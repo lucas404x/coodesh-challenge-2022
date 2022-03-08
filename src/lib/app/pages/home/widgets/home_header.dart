@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../constants/app_strings.dart';
-
 class HomeHeader extends StatelessWidget {
   const HomeHeader({Key? key}) : super(key: key);
 
@@ -10,7 +8,7 @@ class HomeHeader extends StatelessWidget {
     final _textTheme = Theme.of(context).textTheme;
     return Center(
       child: Text(
-        AppStrings.appTitle,
+        'Coodesh Challenge',
         style: _textTheme.headline5,
       ),
     );

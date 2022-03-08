@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'constants/app_colors.dart';
 import 'core/interfaces/product_image_repository_interface.dart';
 import 'core/interfaces/product_repository_interface.dart';
 import 'pages/home/home_page.dart';
@@ -35,8 +34,8 @@ class MyApp extends StatelessWidget {
           initialRoute: HomePage.router,
           theme: ThemeData(
             primarySwatch: Colors.deepPurple,
-            backgroundColor: AppColors.backgroundColor,
-            scaffoldBackgroundColor: AppColors.backgroundColor,
+            backgroundColor: const Color(0xFFF9F8F9),
+            scaffoldBackgroundColor: const Color(0xFFF9F8F9),
             textTheme: GoogleFonts.openSansTextTheme(),
           ),
         ),

@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../constants/app_assets.dart';
 import '../core/models/product_list_model.dart';
 import 'custom_rating_bar.dart';
 import 'product_item_dropdown.dart';

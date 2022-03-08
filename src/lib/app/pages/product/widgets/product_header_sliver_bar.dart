@@ -2,8 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../constants/app_assets.dart';
-
 import '../blocs/product_form_bloc/product_form_state.dart';
 import '../blocs/product_form_bloc/product_form_bloc.dart';
 
