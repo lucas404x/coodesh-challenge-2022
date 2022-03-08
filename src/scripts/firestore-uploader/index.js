@@ -8,7 +8,7 @@ import {
 } from "firebase/firestore";
 import { readFileSync } from "fs";
 
-const productsPath = "../../products.json";
+const productsPath = "../../../products.json";
 
 function loadFirestore() {
   const firebaseConfig = {
