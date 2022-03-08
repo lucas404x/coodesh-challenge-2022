@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/app_assets.dart';
@@ -53,11 +54,11 @@ class _ProductListTileState extends State<ProductListTile> {
             children: [
               Hero(
                 tag: widget.product.id,
-                child: Image.asset(
-                  '${AppAssets.imagesPath}/${widget.product.image}',
-                  fit: BoxFit.cover,
+                child: CachedNetworkImage(
+                  imageUrl: widget.product.image,
                   width: 85,
                   height: 85,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(width: 16),

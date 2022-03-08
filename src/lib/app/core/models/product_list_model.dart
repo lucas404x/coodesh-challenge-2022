@@ -25,16 +25,20 @@ class ProductListModel {
     required this.rating,
   });
 
-  factory ProductListModel.fromProductModel(ProductModel product) =>
-      ProductListModel(
-        id: product.id,
-        title: product.title,
-        image: product.filename,
-        date: fromTimestampToDateFormatted(product.dateCreated),
-        width: product.width,
-        height: product.height,
-        type: product.type,
-        price: fromNumberToPriceWithSymbol(product.price),
-        rating: product.rating,
-      );
+  factory ProductListModel.fromProductModel(
+    ProductModel product,
+    String imageUrl,
+  ) {
+    return ProductListModel(
+      id: product.id,
+      title: product.title,
+      image: imageUrl,
+      date: fromTimestampToDateFormatted(product.dateCreated),
+      width: product.width,
+      height: product.height,
+      type: product.type,
+      price: fromNumberToPriceWithSymbol(product.price),
+      rating: product.rating,
+    );
+  }
 }

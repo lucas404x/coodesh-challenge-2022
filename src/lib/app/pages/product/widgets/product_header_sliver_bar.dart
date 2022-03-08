@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -35,8 +36,8 @@ class ProductHeaderSliverBar extends StatelessWidget {
               centerTitle: true,
               background: Hero(
                 tag: productId,
-                child: Image.asset(
-                  '${AppAssets.imagesPath}/$image',
+                child: CachedNetworkImage(
+                  imageUrl: image,
                   fit: BoxFit.cover,
                 ),
               ),

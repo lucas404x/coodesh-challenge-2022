@@ -1,15 +1,22 @@
 import 'package:bloc/bloc.dart';
 
+import '../../../core/interfaces/product_image_repository_interface.dart';
 import '../../../core/interfaces/product_repository_interface.dart';
 import '../../../core/models/product_list_model.dart';
+import '../../../core/models/product_model.dart';
 import 'home_bloc_event.dart';
 import 'home_bloc_state.dart';
 
 class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
   final IProductRepository _productRepository;
-  List<ProductListModel> _productsList = [];
+  final IProductImageRepository _productImageRepository;
 
-  HomeBloc(this._productRepository) : super(HomeInitialState()) {
+  final List<ProductListModel> _productsList = [];
+
+  HomeBloc(
+    this._productRepository,
+    this._productImageRepository,
+  ) : super(HomeInitialState()) {
     on<GetProductsEvent>(_loadAllProducts);
     on<DeleteProductEvent>(_deleteProduct);
   }
@@ -18,16 +25,25 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     GetProductsEvent event,
     Emitter<HomeBlocState> emitter,
   ) async {
+    List<ProductModel> products;
+
     emitter(HomeProductsLoadingState());
+    _productsList.clear();
+
     try {
-      final products = await _productRepository.getAllProducts();
-      _productsList = products
-          .map((product) => ProductListModel.fromProductModel(product))
-          .toList();
-      emitter(HomeProductsLoadedState(_productsList));
+      products = await _productRepository.getAllProducts();
     } catch (exception) {
       emitter(HomeProductsErrorState(exception.toString()));
+      return;
     }
+
+    for (var product in products) {
+      String imageUrl =
+          await _productImageRepository.getDownloadUrl(product.filename);
+      _productsList.add(ProductListModel.fromProductModel(product, imageUrl));
+    }
+
+    emitter(HomeProductsLoadedState(_productsList));
   }
 
   _deleteProduct(
