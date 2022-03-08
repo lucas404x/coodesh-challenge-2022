@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_challenge_202106/app/pages/home/home_page.dart';
 
 import '../../../core/enumerators/product_form_enum.dart';
 import '../../../core/models/product_model.dart';
@@ -46,15 +47,15 @@ class _ProductBodyForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<ProductFormBloc, ProductFormState>(
       bloc: context.read<ProductFormBloc>(),
-      listener: ((context, state) {
+      listener: ((context, state) async {
         if (state.status == ProductFormEnum.submitted) {
           ScaffoldMessenger.of(context)
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(content: Text('${state.title.value} updated!'))
-          );
-        }
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+                SnackBar(content: Text('${state.title.value} updated!')));
 
+          Navigator.of(context).pop(true);
+        }
       }),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),

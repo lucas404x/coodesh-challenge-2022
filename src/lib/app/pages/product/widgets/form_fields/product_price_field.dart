@@ -17,20 +17,22 @@ class ProductPriceField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _currentTextInputFormatter = CurrencyTextInputFormatter(
+      locale: 'pt-BR',
+      name: '',
+    );
+
     return BlocBuilder<ProductFormBloc, ProductFormState>(
       buildWhen: (previous, current) => previous.price != current.price,
       bloc: context.read<ProductFormBloc>(),
       builder: (context, state) => Flexible(
         child: CustomTextInput(
-          initialValue: initialValue,
+          initialValue: _currentTextInputFormatter.format(initialValue),
           errorText:
               state.price.valid ? null : 'An invalid price was provided.',
           labelText: 'Price',
           prefixText: 'R\$',
-          inputFormatters: [CurrencyTextInputFormatter(
-            locale: 'pt-BR',
-            name: ''
-          )],
+          inputFormatters: [_currentTextInputFormatter],
           onTextChanged: (String price) {
             context.read<ProductFormBloc>().add(PriceProductChangeEvent(price));
           },

@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../constants/app_assets.dart';
 import '../core/models/product_list_model.dart';
-import '../pages/product/product_page.dart';
 import 'custom_rating_bar.dart';
 import 'product_item_dropdown.dart';
 
 class ProductListTile extends StatefulWidget {
   final ProductListModel product;
+  final void Function() onEdit;
+  final void Function() onDelete;
 
   const ProductListTile({
     Key? key,
     required this.product,
+    required this.onEdit,
+    required this.onDelete,
   }) : super(key: key);
 
   @override
@@ -62,7 +65,11 @@ class _ProductListTileState extends State<ProductListTile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    _ProductListTitle(product: widget.product),
+                    _ProductListTitle(
+                      product: widget.product,
+                      onEdit: widget.onEdit,
+                      onDelete: widget.onDelete,
+                    ),
                     const SizedBox(height: 8),
                     Text(
                       widget.product.type,
@@ -92,10 +99,14 @@ class _ProductListTileState extends State<ProductListTile> {
 
 class _ProductListTitle extends StatelessWidget {
   final ProductListModel product;
+  final void Function() onEdit;
+  final void Function() onDelete;
 
   const _ProductListTitle({
     Key? key,
     required this.product,
+    required this.onEdit,
+    required this.onDelete,
   }) : super(key: key);
 
   @override
@@ -117,13 +128,8 @@ class _ProductListTitle extends StatelessWidget {
           ),
         ),
         ProductItemDropwdown(
-          onEdit: () {
-            Navigator.of(context).pushNamed(
-              ProductPage.router,
-              arguments: product,
-            );
-          },
-          onDelete: () {},
+          onEdit: onEdit,
+          onDelete: onDelete,
         ),
       ],
     );

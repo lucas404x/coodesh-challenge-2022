@@ -35,8 +35,9 @@ class ProductRepository implements IProductRepository {
   }
 
   @override
-  Future<bool> saveProduct(ProductModel product) {
-    throw UnimplementedError();
+  Future<bool> updateProduct(ProductModel product) async {
+    await _collectionReference.doc(product.id).set(product);
+    return true;
   }
 
   @override

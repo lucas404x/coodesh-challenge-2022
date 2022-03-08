@@ -1,13 +1,16 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter_challenge_202106/app/utils/money_utils.dart';
 
 import '../../../../core/enumerators/product_form_enum.dart';
 import '../../../../core/interfaces/product_repository_interface.dart';
 import '../../../../core/models/product_form_field_model.dart';
+import '../../../../core/models/product_model.dart';
 import 'product_form_event.dart';
 import 'product_form_state.dart';
 
 class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   final IProductRepository _productRepository;
+  ProductModel? _product;
 
   ProductFormBloc(this._productRepository) : super(ProductFormState()) {
     on<LoadProductFields>(_loadProductFields);
@@ -23,6 +26,8 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
     LoadProductFields event,
     Emitter<ProductFormState> emitter,
   ) {
+    _product = event.product;
+
     emitter(
       state.copyWith(
         title: ProductFormFieldModel(
@@ -125,10 +130,22 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
   ) async {
     emitter(state.copyWith(status: ProductFormEnum.submitting));
     if (state.title.valid && state.type.valid && state.price.valid) {
-      await Future.delayed(const Duration(seconds: 2));
+      await _productRepository.updateProduct(
+        ProductModel(
+          id: _product!.id,
+          dateCreated: _product!.dateCreated,
+          title: state.title.value!,
+          type: state.type.value!,
+          description: state.description.value!,
+          filename: _product!.filename,
+          height: _product!.height,
+          width: _product!.width,
+          price: fromPriceFormattedToNumber(state.price.value!),
+          rating: state.rating.value!,
+        ),
+      );
+
       emitter(state.copyWith(status: ProductFormEnum.submitted));
-      await Future.delayed(const Duration(seconds: 3));
-      emitter(state.copyWith(status: ProductFormEnum.notSubmitted));
     } else {
       emitter(state.copyWith(status: ProductFormEnum.notSubmitted));
     }
