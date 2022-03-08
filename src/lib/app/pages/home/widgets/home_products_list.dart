@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_challenge_202106/app/pages/home/bloc/home_bloc.dart';
-import 'package:flutter_challenge_202106/app/pages/home/bloc/home_bloc_state.dart';
 
 import '../../../core/models/product_list_model.dart';
 import '../../../widgets/product_list_tile.dart';
 import '../../product/product_page.dart';
+import '../bloc/home_bloc.dart';
 import '../bloc/home_bloc_event.dart';
+import '../bloc/home_bloc_state.dart';
 
 class HomeProductsList extends StatelessWidget {
   final List<ProductListModel> products;

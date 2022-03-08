@@ -39,7 +39,7 @@ class ProductFormBloc extends Bloc<ProductFormEvent, ProductFormState> {
           valid: true,
         ),
         price: ProductFormFieldModel(
-          value: event.product.price.toString(),
+          value: fromNumberToPriceFormatted(event.product.price),
           valid: true,
         ),
         rating: ProductFormFieldModel(

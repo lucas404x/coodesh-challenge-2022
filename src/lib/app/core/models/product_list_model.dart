@@ -34,7 +34,7 @@ class ProductListModel {
         width: product.width,
         height: product.height,
         type: product.type,
-        price: fromNumberToPriceFormatted(product.price),
+        price: fromNumberToPriceWithSymbol(product.price),
         rating: product.rating,
       );
 }

@@ -34,7 +34,11 @@ class ProductPriceField extends StatelessWidget {
           prefixText: 'R\$',
           inputFormatters: [_currentTextInputFormatter],
           onTextChanged: (String price) {
-            context.read<ProductFormBloc>().add(PriceProductChangeEvent(price));
+            context.read<ProductFormBloc>().add(
+                  PriceProductChangeEvent(
+                    _currentTextInputFormatter.getFormattedValue(),
+                  ),
+                );
           },
         ),
       ),

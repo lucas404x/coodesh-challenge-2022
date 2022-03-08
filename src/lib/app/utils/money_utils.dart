@@ -1,13 +1,15 @@
 import 'package:intl/intl.dart';
 
-String fromNumberToPriceFormatted(double price) {
+String fromNumberToPriceWithSymbol(double price) {
   return NumberFormat.currency(locale: 'pt-BR', symbol: 'R\$').format(price);
 }
 
-double fromPriceFormattedToNumber(String priceFormatted) {
-  double value = NumberFormat.currency(locale: 'pt-BR', name: '')
-      .parse(priceFormatted)
-      .toDouble();
+String fromNumberToPriceFormatted(double price) {
+  return NumberFormat.currency(locale: 'pt-BR', name: '').format(price).trim();
+}
 
-  return value;
+double fromPriceFormattedToNumber(String priceFormatted) {
+  return NumberFormat.currency(
+    locale: 'pt-BR',
+  ).parse(priceFormatted).toDouble();
 }
