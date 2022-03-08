@@ -18,6 +18,7 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
     this._productImageRepository,
   ) : super(HomeInitialState()) {
     on<GetProductsEvent>(_loadAllProducts);
+    on<UpdateProductEvent>(_updateProduct);
     on<DeleteProductEvent>(_deleteProduct);
   }
 
@@ -42,6 +43,30 @@ class HomeBloc extends Bloc<HomeBlocEvent, HomeBlocState> {
           await _productImageRepository.getDownloadUrl(product.filename);
       _productsList.add(ProductListModel.fromProductModel(product, imageUrl));
     }
+
+    emitter(HomeProductsLoadedState(_productsList));
+  }
+
+  _updateProduct(
+    UpdateProductEvent event,
+    Emitter<HomeBlocState> emitter,
+  ) async {
+    ProductModel updatedProduct;
+
+    try {
+      updatedProduct = await _productRepository.getProduct(
+        _productsList[event.index].id,
+      );
+    } catch (exception) {
+      emitter(HomeProductsErrorState(exception.toString()));
+      return;
+    }
+
+    String imageUrl = _productsList[event.index].image;
+    _productsList[event.index] = ProductListModel.fromProductModel(
+      updatedProduct,
+      imageUrl,
+    );
 
     emitter(HomeProductsLoadedState(_productsList));
   }

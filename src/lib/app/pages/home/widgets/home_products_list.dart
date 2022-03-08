@@ -32,7 +32,7 @@ class HomeProductsList extends StatelessWidget {
             ) as bool?;
 
             if (shouldRebuild ?? false) {
-              BlocProvider.of<HomeBloc>(context).add(GetProductsEvent());
+              BlocProvider.of<HomeBloc>(context).add(UpdateProductEvent(index));
             }
           },
           onDelete: () async {
