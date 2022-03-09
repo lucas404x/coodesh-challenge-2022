@@ -6,7 +6,6 @@ import '../../core/interfaces/product_repository_interface.dart';
 import 'bloc/home_bloc.dart';
 import 'bloc/home_bloc_event.dart';
 import 'bloc/home_bloc_state.dart';
-import 'widgets/home_header.dart';
 import 'widgets/home_products_list.dart';
 
 class HomePage extends StatelessWidget {
@@ -32,15 +31,17 @@ class _HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Coodesh Challenge'),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 16.0),
-              const HomeHeader(),
-              const SizedBox(height: 48.0),
+              const SizedBox(height: 16),
               Expanded(
                 child: BlocBuilder<HomeBloc, HomeBlocState>(
                   bloc: context.read<HomeBloc>(),
