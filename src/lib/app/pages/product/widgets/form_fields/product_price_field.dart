@@ -26,7 +26,7 @@ class ProductPriceField extends StatelessWidget {
         child: CustomTextInput(
           initialValue: _currentTextInputFormatter.format(initialValue),
           errorText:
-              state.price.valid ? null : 'An invalid price was provided.',
+              state.price.valid ? null : 'Invalid price.',
           labelText: 'Price',
           prefixText: 'R\$',
           textInputType: TextInputType.number,
@@ -34,7 +34,9 @@ class ProductPriceField extends StatelessWidget {
           onTextChanged: (String price) {
             context.read<ProductFormBloc>().add(
                   PriceProductChangeEvent(
-                    _currentTextInputFormatter.getFormattedValue(),
+                    price.isNotEmpty
+                        ? _currentTextInputFormatter.getFormattedValue()
+                        : '',
                   ),
                 );
           },
